@@ -9,4 +9,11 @@ const ErrorHandler = (err, req, res, next) => {
     })
 }
 
+export const CustomErrorHandler = (statusCode, message) => {
+    const error = new Error();
+    error.statusCode = statusCode;
+    error.message = message;
+    return error;
+}
+
 export default ErrorHandler;
