@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
@@ -27,6 +28,7 @@ export default function Signup() {
         setError(true);
         return;
       }
+      navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(false);
@@ -58,9 +60,9 @@ export default function Signup() {
         <button disabled={loading} className="bg-slate-700 rounded-lg text-white uppercase p-3 hover:opacity-95 disabled:opacity-80">
           { loading ? 'Loading...' : 'Sign Up' }
         </button>
-        <button className="bg-red-700 rounded-lg text-white uppercase p-3 hover:opacity-95 disabled:opacity-80">
+        {/* <button className="bg-red-700 rounded-lg text-white uppercase p-3 hover:opacity-95 disabled:opacity-80">
           Continue with google
-        </button>
+        </button> */}
       </form>
       <div className="flex gap-2 my-5">
         <p>Have an account? </p>
