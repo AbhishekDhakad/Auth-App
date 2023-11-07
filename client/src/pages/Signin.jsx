@@ -25,7 +25,7 @@ export default function Signin() {
       });
       const data = await res.json();
       if(data.success === false) {
-        dispatch(signInFailure(data.message));
+        dispatch(signInFailure(data));
         return;
       }
       dispatch(signInSuccess(data));
@@ -58,7 +58,7 @@ export default function Signin() {
           Continue with google
         </button> */}
       </form>
-      <p className="text-red-500 my-5">{error && 'Something went wrong!'}</p>
+      <p className="text-red-500 my-5">{ error ? error.message || 'Something went wrong!' : '' }</p>
       <div className="flex gap-2 my-5">
         <p>Dont have an account? </p>
         <Link to="/sign-up">
