@@ -1,17 +1,17 @@
-import React from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { app } from "../config/firebase";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 
 export default function OAuth() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      console.log("0", result);
       const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
@@ -24,8 +24,8 @@ export default function OAuth() {
         }),
       });
       const data = await res.json();
-      console.log("1", data);
       dispatch(signInSuccess(data));
+      navigate('/');
     } catch (error) {
       console.log("Cannot login with google", error);
     }
