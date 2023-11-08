@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInStart, signInFailure, signInSuccess } from "../redux/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 
 export default function Signup() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
@@ -15,7 +14,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(signInStart());
+      setLoading(true);
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -25,13 +24,15 @@ export default function Signup() {
       });
       const data = await res.json();
       if(data.success === false) {
-        dispatch(signInFailure(data))
+        setError(true);
+        setLoading(false);
         return;
       }
-      dispatch(signInSuccess(data));
+      setLoading(false);
       navigate('/sign-in');
     } catch (error) {
-      dispatch(signInFailure(error));
+      setLoading(false);
+      setError(false);
     }
   }
   
@@ -60,9 +61,7 @@ export default function Signup() {
         <button disabled={loading} className="bg-slate-700 rounded-lg text-white uppercase p-3 hover:opacity-95 disabled:opacity-80">
           { loading ? 'Loading...' : 'Sign Up' }
         </button>
-        {/* <button className="bg-red-700 rounded-lg text-white uppercase p-3 hover:opacity-95 disabled:opacity-80">
-          Continue with google
-        </button> */}
+        <OAuth />
       </form>
       <div className="flex gap-2 my-5">
         <p>Have an account? </p>
