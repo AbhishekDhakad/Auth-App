@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser';
 const dotenvCon = dotenv.config();
 import connectDb from './config/dbConnection.js';
 import userRoutes from './routes/userRoute.js';
@@ -9,6 +10,7 @@ import ErrorHandler from './middlewares/ErrorHandler.js';
 connectDb();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 
