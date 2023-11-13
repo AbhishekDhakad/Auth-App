@@ -5,6 +5,12 @@
 ✔️ Signin.\
 ✔️ View and update profile.\
 
+## 🚀 Techonologies
+- Nodejs
+- JWT for authentication, cookie-parser for reading cookies.
+- Express
+- MongoDB
+
 
 ## 👨🏻‍💻 Run Locally
 
@@ -41,11 +47,6 @@
   npm run start
 ```
 
-## 🚀 Techonologies
-- Nodejs
-- JWT for authentication, cookie-parser for reading cookies.
-- Express
-- MongoDB
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
