@@ -3,7 +3,7 @@
 ## ✨ Features
 ✔️ Signup.\
 ✔️ Signin.\
-✔️ View and update profile.\
+✔️ View and update profile.
 
 ## 🚀 Techonologies
 - Nodejs
